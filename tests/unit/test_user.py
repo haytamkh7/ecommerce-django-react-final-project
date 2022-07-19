@@ -10,15 +10,15 @@ def create_user():
                                username='test_user@test.com',
                                password='password')
 
-
-def create_product():
-    return Product.objects.create(
-        name="Jimi Hendrix Guitar",
-        price=200,
-        brand="Fender",
-        countInStock=1,
-        category="Electric Guitar",
-        description="Best guitar")
+#
+# def create_product():
+#     return Product.objects.create(
+#         name="Jimi Hendrix Guitar",
+#         price=200,
+#         brand="Fender",
+#         countInStock=1,
+#         category="Electric Guitar",
+#         description="Best guitar")
 
 
 @pytest.mark.django_db
@@ -34,8 +34,8 @@ def test_set_check_password(user_1):
     assert user_1.check_password("new-password") is True
 
 
-@pytest.mark.django_db
-def test_product_creation():
-    p = create_product()
-    assert isinstance(p, Product) is True
-    assert p.name == "Jimi Hendrix Guitar"
+# @pytest.mark.django_db
+# def test_product_creation():
+#     p = create_product()
+#     assert isinstance(p, Product) is True
+#     assert p.name == "Jimi Hendrix Guitar"
