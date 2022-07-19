@@ -11,7 +11,8 @@ def create_product():
         brand="Sample brand ",
         countInStock=0,
         category="Sample category",
-        description=" ")
+        description=" ",
+    )
 
 
 @pytest.mark.django_db
@@ -22,16 +23,16 @@ def test_product_creation():
 
 
 def create_user():
-    return User.objects.create(first_name='Jimmy',
-                               username='test_user@test.com',
-                               password='password')
+    return User.objects.create(
+        first_name="Jimmy", username="test_user@test.com", password="password"
+    )
 
 
 @pytest.mark.django_db
 def test_create_user():
     new_user_jimmy = create_user()
     assert isinstance(new_user_jimmy, User) is True
-    assert new_user_jimmy.first_name == 'Jimmy'
+    assert new_user_jimmy.first_name == "Jimmy"
 
 
 @pytest.mark.django_db
@@ -39,9 +40,3 @@ def test_set_check_password():
     new_user_jimmy = create_user()
     new_user_jimmy.set_password("new-password")
     assert new_user_jimmy.check_password("new-password") is True
-
-# @pytest.mark.django_db
-# def test_product_creation():
-#     p = create_product()
-#     assert isinstance(p, Product) is True
-#     assert p.name == "Jimi Hendrix Guitar"
