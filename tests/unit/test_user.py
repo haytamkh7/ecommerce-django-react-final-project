@@ -28,10 +28,10 @@ def test_create_user():
     assert new_user_jimmy.first_name == 'Jimmy'
 
 
-@pytest.mark.django_db
-def test_set_check_password(user_1):
-    user_1.set_password("new-password")
-    assert user_1.check_password("new-password") is True
+# @pytest.mark.django_db
+# def test_set_check_password(user_1):
+#     user_1.set_password("new-password")
+#     assert user_1.check_password("new-password") is True
 
 
 # @pytest.mark.django_db
