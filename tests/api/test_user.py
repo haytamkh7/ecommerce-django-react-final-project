@@ -1,53 +1,73 @@
 import pytest
-from django.contrib.auth.models import User
-from django.utils import timezone
 from rest_framework.test import APIClient
 
 from base.models import Product
 
-'''
-Unit tests -> checking user creation func
-'''
+from rest_framework.authtoken.admin import User
+
+"""
+API Test -> Integration Test - testing if Api can create a user successfully
+"""
+
+# @pytest.mark.django_db - communicating with database then deleting the added element from the database
+# if we delete this line of code, the database will actually have the product in it.
+
+client = APIClient()
 
 
-def test_new_user(new_user):
-    print(new_user.first_name)
-    assert new_user.first_name == "Jimmy_the_new_user"
+@pytest.mark.django_db
+def test_api_user_creation():
+    payload = dict(
+        name="test_user@test.com", email="test_user@test.com", password="password789"
+    )
+    response = client.post("/api/users/register/", payload)
+    payload = dict(username=response.data["username"], password="password789")
+    response = client.post("/api/users/login/", payload)
+    assert response.status_code == 200
 
 
-def test_is_staff(new_staff_member):
-    print(new_staff_member.first_name)
-    assert new_staff_member.is_staff
-# @pytest.mark.django_db
-# def test_user_create():
-#     User.objects.create_user('test', 'test@test.com', 'test')
-#     count = User.objects.all().count()
-#     assert count == 1
+@pytest.mark.django_db
+def test_api_login():
+    # Register user
+    payload = dict(first_name='Michael', last_name='Scott', email='michael_s@gmail.com', password='yespassword')
+    client.post("/api/register/", payload)
+
+    # Sign in
+    response = client.post("/api/login/", dict(email='michael_s@gmail.com', password='yespassword'))
+
+    # Status code for login
+    assert response.status_code == 200
 
 
-# @pytest.fixture()
-# def user_1(db):
-#     return User.objects.create_user("test-user")
+def create_product():
+    return Product.objects.create(
+        name="Jimi Hendrix Guitar",
+        price=200,
+        brand="Fender",
+        countInStock=1,
+        category="Electric Guitar",
+        description="Best guitar")
 
 
-#
-# '''
-# Integration testing testing api to register user
-# '''
-#
-#
-# @pytest.mark.django_db
-# def test_register_user():
-#     client = APIClient()
-#
-#     payload = dict(
-#         name="testing123",
-#         email="test11@test.com",
-#         password="super-secret"
-#     )
-#
-#     response = client.post("/api/users/register/", payload)
-#
-#     data = response.data
-#
-#     assert data["name"] == payload["name"]
+@pytest.mark.django_db
+def test_product_creation():
+    p = create_product()
+    assert isinstance(p, Product) is True
+    assert p.name == "Jimi Hendrix Guitar"
+
+
+# Api test  - Integration testing
+@pytest.mark.django_db
+def test_api_product_creation():
+    user = User.objects.create_superuser(username="Admin7", password='adminadmin', email='admin7@gmail.com')
+    client.force_authenticate(user)
+    payload = dict(
+        name="Jimi Hendrix Guitar",
+        price=200,
+        brand="Fender",
+        countInStock=1,
+        category="Electric Guitar",
+        description="Best guitar"
+    )
+    response = client.post("/api/products/create/")
+    assert response.status_code == 200
