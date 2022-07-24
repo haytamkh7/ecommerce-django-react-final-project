@@ -4,24 +4,6 @@ from django.contrib.auth.models import User
 from base.models import Product
 
 
-def create_product():
-    return Product.objects.create(
-        name=" Product Name ",
-        price=0,
-        brand="Sample brand ",
-        countInStock=0,
-        category="Sample category",
-        description=" ",
-    )
-
-
-@pytest.mark.django_db
-def test_product_creation():
-    p = create_product()
-    assert isinstance(p, Product) is True
-    assert p.name == " Product Name "
-
-
 def create_user():
     return User.objects.create(
         first_name="Jimmy", username="test_user@test.com", password="password"
@@ -40,3 +22,21 @@ def test_set_check_password():
     new_user_jimmy = create_user()
     new_user_jimmy.set_password("new-password")
     assert new_user_jimmy.check_password("new-password") is True
+
+
+def create_product():
+    return Product.objects.create(
+        name=" Product Name ",
+        price=0,
+        brand="Sample brand ",
+        countInStock=0,
+        category="Sample category",
+        description=" ",
+    )
+
+
+@pytest.mark.django_db
+def test_product_creation():
+    p = create_product()
+    assert isinstance(p, Product) is True
+    assert p.name == " Product Name "
