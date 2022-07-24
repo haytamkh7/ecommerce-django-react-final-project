@@ -15,15 +15,6 @@
 
 ```
 
-### 📷 Project Screenshots
-
-![ss](./ss/ss1.png)
-![ss](./ss/ss2.png)
-![ss](./ss/ss3.png)
-![ss](./ss/ss4.png)
-![ss](./ss/ss5.png)
-![ss](./ss/ss6.png)
-
 ### 🚀 Project Features
 
 A completely customized eCommerce / shopping cart application using Django, REACT and REDUX with the following functionality:
