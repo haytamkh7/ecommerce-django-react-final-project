@@ -2,11 +2,17 @@
 <h2 align=center>Hendrix - Online Guitar Shop</h2>
 
 As part of QA Automation bootcamp I documented and planned STP and STD documents
+
 for e-commerce website (Guitar shop "Hendrix").
+
 In addition to automated tests using different technologies like:
+
 • Python (Pytest Framework, Django)
+
 • Selenium (IDE, Webdriver, Grid)
+
 • Appium server (for mobile)
+
 • Jenkins (for tests deploying)
 
 
