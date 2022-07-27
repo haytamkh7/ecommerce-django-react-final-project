@@ -45,12 +45,12 @@ A completely customized eCommerce / shopping cart application using Django, REAC
 - Checkout process (shipping, payment method, etc)
 - PayPal / credit card integration
 
-* Tests
+### Tests
 - Unit tests
 - Integration tests
 - E2E tests (using selenium)
 - STP AND STD
-* Tools
+### Tools
 - Selenium
 - Jenkins
 - Docker
