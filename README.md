@@ -44,3 +44,13 @@ A completely customized eCommerce / shopping cart application using Django, REAC
 - Mark orders as a delivered option
 - Checkout process (shipping, payment method, etc)
 - PayPal / credit card integration
+
+* Tests
+- Unit tests
+- Integration tests
+- E2E tests (using selenium)
+- STP AND STD
+* Tools
+- Selenium
+- Jenkins
+- Docker
